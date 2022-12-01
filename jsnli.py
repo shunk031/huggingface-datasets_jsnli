@@ -30,15 +30,14 @@ _URL = "https://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=https://nlp.ist.
 
 class JSNLIDataset(ds.GeneratorBasedBuilder):
     VERSION = ds.Version("1.1.0")  # type: ignore
-    DEFAULT_CONFIG_NAME: str = "w_filtering"  # type: ignore
     BUILDER_CONFIG = [
         ds.BuilderConfig(
-            name="w_filtering",
+            name="with-filtering",
             version=VERSION,  # type: ignore
             description="SNLIの学習データに機械翻訳を適用した後、BLEUスコアの閾値0.1でフィルタリングを施したもの。BERTにこの学習データを学習させることにより、93.0%の精度を記録した。(533,005ペア)",
         ),
         ds.BuilderConfig(
-            name="wo_filtering",
+            name="without-filtering",
             version=VERSION,  # type: ignore
             description="SNLIの学習データに機械翻訳を適用したもの。フィルタリングは行っていない。(548,014ペア)",
         ),
@@ -70,9 +69,9 @@ class JSNLIDataset(ds.GeneratorBasedBuilder):
         train_wo_filtering_path = os.path.join(jsnli_dir, "train_wo_filtering.tsv")
 
         dev_path = os.path.join(jsnli_dir, "dev.tsv")
-        if "w_filtering" in self.config.name:
+        if "with-filtering" in self.config.name:
             tng_path = train_w_filtering_path
-        elif "wo_filtering" in self.config.name:
+        elif "without-filtering" in self.config.name:
             tng_path = train_wo_filtering_path
         else:
             raise ValueError(f"Invalid config name: {self.config.name}")

@@ -10,8 +10,8 @@ def dataset_path() -> str:
 @pytest.mark.parametrize(
     "dataset_name, expected_num_train,",
     (
-        ("wo_filtering", 548014),
-        ("w_filtering", 533005),
+        ("without-filtering", 548014),
+        ("with-filtering", 533005),
     ),
 )
 def test_load_dataset(
