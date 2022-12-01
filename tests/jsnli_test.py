@@ -24,3 +24,12 @@ def test_load_dataset(
 
     assert dataset["train"].num_rows == expected_num_train  # type: ignore
     assert dataset["validation"].num_rows == expected_num_valid  # type: ignore
+
+
+def test_load_dataset_default(
+    dataset_path: str, expected_num_train: int = 533005, expected_num_valid: int = 3916
+):
+
+    dataset = ds.load_dataset(path=dataset_path)
+    assert dataset["train"].num_rows == expected_num_train  # type: ignore
+    assert dataset["validation"].num_rows == expected_num_valid  # type: ignore

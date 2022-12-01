@@ -30,6 +30,7 @@ _URL = "https://nlp.ist.i.kyoto-u.ac.jp/DLcounter/lime.cgi?down=https://nlp.ist.
 
 class JSNLIDataset(ds.GeneratorBasedBuilder):
     VERSION = ds.Version("1.1.0")  # type: ignore
+    DEFAULT_CONFIG_NAME: str = "with-filtering"  # type: ignore
     BUILDER_CONFIG = [
         ds.BuilderConfig(
             name="with-filtering",
