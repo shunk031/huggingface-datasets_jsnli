@@ -70,12 +70,12 @@ class JSNLIDataset(ds.GeneratorBasedBuilder):
         train_wo_filtering_path = os.path.join(jsnli_dir, "train_wo_filtering.tsv")
 
         dev_path = os.path.join(jsnli_dir, "dev.tsv")
-        if "with-filtering" in self.config.name:
-            tng_path = train_w_filtering_path
-        elif "without-filtering" in self.config.name:
+
+        if "without-filtering" in self.config.name:
             tng_path = train_wo_filtering_path
         else:
-            raise ValueError(f"Invalid config name: {self.config.name}")
+            # use `with-filtering` dataset as default setting
+            tng_path = train_w_filtering_path
 
         tng_gen_kwargs = {
             "tsv_path": tng_path,
