@@ -47,9 +47,11 @@ class JSNLIDataset(ds.GeneratorBasedBuilder):
     def _info(self) -> ds.DatasetInfo:
         features = ds.Features(
             {
-                "label": ds.Value("string"),
                 "premise": ds.Value("string"),
                 "hypothesis": ds.Value("string"),
+                "label": ds.ClassLabel(
+                    names=["entailment", "neutral", "contradiction"]
+                ),
             }
         )
         return ds.DatasetInfo(
@@ -104,8 +106,8 @@ class JSNLIDataset(ds.GeneratorBasedBuilder):
                 label, premise, hypothesis = line.replace("\n", "").split("\t")
 
                 example_dict = {
-                    "label": label,
                     "premise": premise,
                     "hypothesis": hypothesis,
+                    "label": label,
                 }
                 yield sentence_id, example_dict
