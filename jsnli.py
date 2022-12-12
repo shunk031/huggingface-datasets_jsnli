@@ -47,9 +47,11 @@ class JSNLIDataset(ds.GeneratorBasedBuilder):
     def _info(self) -> ds.DatasetInfo:
         features = ds.Features(
             {
-                "label": ds.Value("string"),
                 "premise": ds.Value("string"),
                 "hypothesis": ds.Value("string"),
+                "label": ds.ClassLabel(
+                    names=["entailment", "neutral", "contradiction"]
+                ),
             }
         )
         return ds.DatasetInfo(
