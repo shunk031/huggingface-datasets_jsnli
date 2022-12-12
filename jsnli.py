@@ -106,8 +106,8 @@ class JSNLIDataset(ds.GeneratorBasedBuilder):
                 label, premise, hypothesis = line.replace("\n", "").split("\t")
 
                 example_dict = {
-                    "label": label,
                     "premise": premise,
                     "hypothesis": hypothesis,
+                    "label": label,
                 }
                 yield sentence_id, example_dict
